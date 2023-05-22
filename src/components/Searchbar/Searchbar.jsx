@@ -19,7 +19,7 @@ export const Searchbar = ({ handleSubmit }) => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (!search) {
+   if (!search) {
       return toast.error('Enter text for search.');
     }
 
