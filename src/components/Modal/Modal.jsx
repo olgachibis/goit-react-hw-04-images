@@ -3,12 +3,6 @@ import { createPortal } from 'react-dom';
 import css from './Modal.module.css'; 
 
 export const Modal = ({ closeModal, children }) => {
-  const keyDown = (e) => {
-    if (e.code === 'Escape') {
-      closeModal();
-    }
-  };
-
   const handleClose = (e) => {
     if (e.currentTarget === e.target) {
       closeModal();
@@ -16,13 +10,19 @@ export const Modal = ({ closeModal, children }) => {
   };
 
   useEffect(() => {
+    const keyDown = (e) => {
+      if (e.code === 'Escape') {
+        closeModal();
+      }
+    };
+
     const handleKeyDown = (e) => keyDown(e);
     window.addEventListener('keydown', handleKeyDown);
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [keyDown]);
+  }, [closeModal]);
 
   return createPortal(
     <div onClick={handleClose} className={css.Overlay}>
@@ -31,4 +31,7 @@ export const Modal = ({ closeModal, children }) => {
     document.querySelector('#modal-root')
   );
 };
+
+
+
 
